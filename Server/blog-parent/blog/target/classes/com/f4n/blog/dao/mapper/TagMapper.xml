@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis配置文件-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.f4n.blog.dao.mapper.TagMapper">
+    <!--List<Tag> findTagsByArticleId(Long articleId);-->
+    <select id="findTagsByArticleId" parameterType="long" resultType="com.f4n.blog.dao.pojo.Tag">
+        select id,avatar,tag_name as tagName from zf_tag
+        where id in (
+        select tag_id from zf_article_tag where article_id = #{articleId}
+        )
+    </select>
+    <!--List<Long> findHotsTagsById(int limit);-->
+    <select id="findHotsTagsById" resultType="java.lang.Long">
+select tag_id from `zf_article_tag` group by tag_id order by count(*) desc limit #{limit}
+    </select>
+    <!--List<Tag> findTagsByTagIds(List<Long> hotTags);-->
+    <select id="findTagsByTagIds" resultType="com.f4n.blog.dao.pojo.Tag">
+        select id,tag_name as tagName  from zf_tag
+        where id in<foreach collection="hotTags" item="tagId" separator="," open="("
+                            close=")">
+        #{tagId}
+    </foreach>
+    </select>
+</mapper>
