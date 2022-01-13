@@ -1,9 +1,12 @@
 package com.f4n.blog.dao.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
 public class SysUser {
+//    @TableId(type = IdType.ASSIGN_ID) mybatis自带的 用户多了以后要分表,是
     private Long id;
 
     private String account;
