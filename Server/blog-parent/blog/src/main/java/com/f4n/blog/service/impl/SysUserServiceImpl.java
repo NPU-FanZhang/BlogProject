@@ -8,6 +8,8 @@ import com.f4n.blog.service.SysUserService;
 import com.f4n.blog.vo.ErrorCode;
 import com.f4n.blog.vo.LoginUserVo;
 import com.f4n.blog.vo.Result;
+import com.f4n.blog.vo.UserVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,5 +77,19 @@ public class SysUserServiceImpl implements SysUserService {
         // 这里新增的用户的ID是自动生成了
         // mybatisPlus的id使用的是分布式的雪花算法
         sysUserMapper.insert(sysUser);
+    }
+
+    @Override
+    public UserVo findUserVoById(Long authorId) {
+        SysUser sysUser = sysUserMapper.selectById(authorId);
+        if (sysUser == null) {
+            sysUser = new SysUser();
+            sysUser.setId(1L);
+            sysUser.setAvatar("/static/img/logo.b3a48c0.png");
+            sysUser.setNickname("NULL");
+        }
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(sysUser,userVo);
+        return userVo;
     }
 }

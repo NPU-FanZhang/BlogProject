@@ -1,5 +1,6 @@
 package com.f4n.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.f4n.blog.dao.mapper.TagMapper;
 import com.f4n.blog.dao.pojo.Tag;
 import com.f4n.blog.service.TagService;
@@ -37,6 +38,22 @@ public class TagServiceImpl implements TagService {
         }
         List<Tag> tagList = tagMapper.findTagsByTagIds(hotTags);
         return Result.success(tagList);
+    }
+
+    @Override
+    public Result findAll() {
+        LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.select(Tag::getId,Tag::getTagName);
+        List<Tag> tagList = tagMapper.selectList(queryWrapper);
+        return Result.success(copyList(tagList));
+
+    }
+
+    @Override
+    public Result findAllDetail() {
+        LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
+        List<Tag> tagList = tagMapper.selectList(queryWrapper);
+        return Result.success(copyList(tagList));
     }
 
     public List<TagVo> copyList(List<Tag> tagList) {

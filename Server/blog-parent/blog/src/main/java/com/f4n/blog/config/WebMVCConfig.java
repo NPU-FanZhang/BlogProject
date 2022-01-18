@@ -23,6 +23,9 @@ public class WebMVCConfig implements WebMvcConfigurer {
 //        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(
 //                "/register");
         // 这里只拦截 /test 路径下的请求, 后面遇到真正需要拦截的路径再进行配置即可.
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/test");
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/test")
+                .addPathPatterns("/comments/create/change")
+                .addPathPatterns("/articles/publish");
     }
 }

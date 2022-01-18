@@ -9,8 +9,11 @@ public class Article {
     private Long id;
     private String title;
     private String summary;
-    private int commentCounts;
-    private int viewCounts;
+    // 不能用 int 等基本类型,要用Integer等封装类型
+    // 会出现在 更新操作时,会给 int 等基本类型给默认值,会产生错误
+    private Integer commentCounts;
+//    private int commentCounts;
+    private Integer viewCounts;
     //作者id
     private Long authorId;
     //内容id
@@ -18,7 +21,7 @@ public class Article {
     //类别id
     private Long categoryId;
     //置顶
-    private int weight = Article_Common;
+    private Integer weight = Article_Common;
     // 创建时间
     private Long createDate;
 

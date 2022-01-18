@@ -1,6 +1,7 @@
 package com.f4n.blog.service;
 
 import com.f4n.blog.vo.Result;
+import com.f4n.blog.vo.params.ArticleParams;
 import com.f4n.blog.vo.params.PageParams;
 
 public interface ArticleService {
@@ -11,4 +12,8 @@ public interface ArticleService {
     Result newArticle(int limit);
 
     Result listArchives();
+
+    Result findArticleById(Long articleId);
+
+    Result publish(ArticleParams articleParams);
 }

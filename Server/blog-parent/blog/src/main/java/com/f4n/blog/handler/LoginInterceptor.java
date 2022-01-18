@@ -3,6 +3,7 @@ package com.f4n.blog.handler;
 import com.alibaba.fastjson.JSON;
 import com.f4n.blog.dao.pojo.SysUser;
 import com.f4n.blog.service.LoginService;
+import com.f4n.blog.utils.UserThreadLocal;
 import com.f4n.blog.vo.ErrorCode;
 import com.f4n.blog.vo.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +58,12 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         // 验证成功,放行
+        UserThreadLocal.put(sysUser);
         return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        UserThreadLocal.remove();
     }
 }
