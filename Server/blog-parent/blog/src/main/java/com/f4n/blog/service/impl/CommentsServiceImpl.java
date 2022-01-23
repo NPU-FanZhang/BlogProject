@@ -76,6 +76,7 @@ public class CommentsServiceImpl implements CommentsService {
     private CommentVo copy(Comment comment) {
         CommentVo commentVo = new CommentVo();
         BeanUtils.copyProperties(comment, commentVo);
+        commentVo.setId(String.valueOf(comment.getId()));
         /* 作者信息 */
         Long authorId = comment.getAuthorId();
         UserVo UserVo = sysUserService.findUserVoById(authorId);
@@ -91,10 +92,7 @@ public class CommentsServiceImpl implements CommentsService {
             Long toUid = comment.getToUid();
             UserVo userVo = sysUserService.findUserVoById(toUid);
             commentVo.setToUser(userVo);
-
         }
-
-
         return commentVo;
     }
 

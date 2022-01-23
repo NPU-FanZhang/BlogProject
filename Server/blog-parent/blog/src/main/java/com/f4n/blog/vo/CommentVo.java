@@ -9,8 +9,9 @@ import java.util.List;
 @Data
 public class CommentVo {
     /*防止前端精度损失 将Long转为String*/
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+//    @JsonSerialize(using = ToStringSerializer.class)
+//    private Long id;
+    private String id;
     private UserVo author;
     private String content;
     private List<CommentVo> children;

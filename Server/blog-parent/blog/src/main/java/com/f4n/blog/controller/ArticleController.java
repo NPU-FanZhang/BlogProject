@@ -1,6 +1,7 @@
 package com.f4n.blog.controller;
 
 import com.f4n.blog.common.aop.LogAnnotation;
+import com.f4n.blog.common.cache.Cache;
 import com.f4n.blog.service.ArticleService;
 import com.f4n.blog.vo.Result;
 import com.f4n.blog.vo.params.ArticleParams;
@@ -19,17 +20,20 @@ public class ArticleController {
 
     @PostMapping
     @LogAnnotation(module = "文章列表",operator = "获取文章列表")
+    @Cache(expire = 5*60*1000 ,name = "listArticle")
     public Result listArticle(@RequestBody PageParams pageParams) {
         return articleService.listArticle(pageParams);
     }
 
     @PostMapping("hot")
+    @Cache(expire = 5*60*1000 ,name = "hot_article")
     public Result hotArticle() {
         int limit = 3;
         return articleService.hotArticle(limit);
     }
 
     @PostMapping("new")
+    @Cache(expire = 5*60*1000 ,name = "new_article")
     public Result newArticle() {
         int limit = 3;
         return articleService.newArticle(limit);

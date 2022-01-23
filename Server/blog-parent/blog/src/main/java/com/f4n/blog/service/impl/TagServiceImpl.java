@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public Result findAll() {
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.select(Tag::getId,Tag::getTagName);
+        queryWrapper.select(Tag::getId, Tag::getTagName);
         List<Tag> tagList = tagMapper.selectList(queryWrapper);
         return Result.success(copyList(tagList));
 
@@ -54,6 +53,12 @@ public class TagServiceImpl implements TagService {
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
         List<Tag> tagList = tagMapper.selectList(queryWrapper);
         return Result.success(copyList(tagList));
+    }
+
+    @Override
+    public Result findAllDetailById(Long id) {
+        Tag tag = tagMapper.selectById(id);
+        return Result.success(copy(tag));
     }
 
     public List<TagVo> copyList(List<Tag> tagList) {
@@ -67,6 +72,7 @@ public class TagServiceImpl implements TagService {
     public TagVo copy(Tag tag) {
         TagVo tagVo = new TagVo();
         BeanUtils.copyProperties(tag, tagVo);
+        tagVo.setId(String.valueOf(tag.getId()));
         return tagVo;
     }
 }

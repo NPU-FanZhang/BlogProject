@@ -1,17 +1,15 @@
 package com.f4n.blog.vo;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
-import org.omg.CORBA.INTERNAL;
 
 import java.util.List;
 
 @Data
 public class ArticleVo {
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
-
+    //    直接改成String 解决问题
+//    @JsonSerialize(using = ToStringSerializer.class)
+//    private Long id;
+    private String id;
     private String title;
 
     private String summary;
