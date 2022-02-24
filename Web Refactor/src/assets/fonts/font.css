@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Mono-Bold';
+    src: url('JetBrainsMono-Bold.ttf'); 
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Regular.ttf'); 
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Poppins-SemiBold';
+    src: url('Poppins-SemiBold.ttf'); 
+    font-weight: normal;
+    font-style: normal;
+}
